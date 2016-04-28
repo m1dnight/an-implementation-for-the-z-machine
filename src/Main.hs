@@ -1,6 +1,8 @@
 module Main where
 import Types
 import Utility
+import ImmutableBytes
+
 import Text.Printf
 import Data.Bits hiding (setBit, clearBit)
 
@@ -16,6 +18,9 @@ fetchBitsOriginal high length word =
 
 
 main :: IO ()
-main = do putStrLn $ printf "\n\n%x\n\n" (shiftR word 12 .&. complement (shiftL (-1 :: Int) 15))
-          putStrLn $ printf "\n\n%x\n\n" (fetchBitsOriginal 15 4 word)
-          putStrLn $ printf "\n\n%x\n\n" (fetchBits bit15 size4 word)
+main = do let addr1   = ByteAddress 1
+              bytes_a = make "Hello World"
+              bytes_b = writeByte bytes_a addr1 65
+              b_a     = readByte bytes_a addr1
+              b_b     = readByte bytes_b addr1 in
+            printf "%d %d\n" b_a b_b

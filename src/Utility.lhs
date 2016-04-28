@@ -1,5 +1,6 @@
 > module Utility where
 > import Data.Bits hiding (setBit, clearBit)
+> import Data.Word
 > import Types
 
 We first declare a few constants to use through our code.
@@ -60,3 +61,19 @@ fetchBits takes a word and returns the sequence of bits from n to
 >   let mask = complement ((-1 :: Int) `shiftL` len)
 >   in
 >     (word `shiftR` (high - len + 1)) .&. mask
+
+inRange takes a ByteAddress and checks if it is below a certain
+threshold.
+
+> inRange (ByteAddress address) size = 0 <= address && address < size
+
+outOfRange is the inverse of inRange
+
+> outOfRange address size = not $ inRange address size
+
+We need a function to convert a Word8 to an Int, not an Integer. Since
+we are following the blog by Eric we want to keep as close to his
+implementation as possible.
+
+> intFromWord :: Word8 -> Int
+> intFromWord = fromIntegral . toInteger
