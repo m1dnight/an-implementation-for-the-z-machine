@@ -101,6 +101,16 @@ W and not to Bytes.
 > incByteAddrBy (ByteAddress addr) offset = ByteAddress $ addr + offset
 > decByteAddrBy (ByteAddress addr) offset = ByteAddress $ addr - offset
 
+The size of a word in memory is 2 bytes.
+
+> wordSize = 2
+
+Some helpers to incremenet a word address. The next word is two byts
+further. So the next address is + 2.
+
+> incWordAddrBy (WordAddress address) offset = WordAddress $ address + offset * wordSize
+> incWordAddr address = incWordAddrBy address 1
+
 dereferenceString takes an address and a lis tof bytes. It then
 returns the byte at the given address.
 
@@ -141,4 +151,3 @@ words are always stored with the high byte at the lower address:
 
 > addressOfHighByte (WordAddress address) = ByteAddress address
 > addressOfLowByte  (WordAddress address) = ByteAddress $ address + 1
-

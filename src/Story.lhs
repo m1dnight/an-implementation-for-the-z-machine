@@ -109,6 +109,14 @@ into the low address.
 >   in
 >     writeByte story' (addressOfLowByte address) low
 
+The following function reads the 24th byte from memory. It contains a
+16 bit pointer into memory where the abbreviation table starts.
+
+> abbreviationsTableBase story =
+>   let abbreviationsTableBaseOffset = WordAddress 24
+>   in
+>     AbbreviationTableBase (readWord story abbreviationsTableBaseOffset)
+
 Each story file (minizork.z3) starts out with a header of 64 bytes.
 The first byte of the static memory is stored in a word (2 bytes)
 starting at byte 14. So byte 14 and 15 contain the address of the byte
