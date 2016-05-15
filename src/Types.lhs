@@ -47,3 +47,10 @@ A single character extraced from ZString encodings.
 > data ZChar = ZChar Int
 
 
+The dictionary of words recognized by the game has a few types.
+
+> data DictionaryBase      = DictionaryBase Int
+> data DictionaryTableBase = DictionaryTableBase Int
+> data DictionaryAddress   = DictionaryAddress Int
+> data DictionaryNumber    = Dictionary Int
+

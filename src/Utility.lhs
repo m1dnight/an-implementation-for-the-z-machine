@@ -98,6 +98,8 @@ outOfRange is the inverse of inRange
 We need functions to do some pointer arithmetic. This are pointers to
 W and not to Bytes.
 
+> incByteAddr byteAddr = incByteAddrBy byteAddr 1
+
 > incByteAddrBy (ByteAddress addr) offset = ByteAddress $ addr + offset
 > decByteAddrBy (ByteAddress addr) offset = ByteAddress $ addr - offset
 
@@ -157,3 +159,12 @@ code of Eric Lippert.
 
 > stringOfChar :: Char -> String
 > stringOfChar c = [c]
+
+
+> accumulateStringsLoop toString start max =
+>   let aux acc i =
+>         if i >= max
+>            then acc
+>            else aux (acc ++ (toString i)) (i + 1)
+>   in
+>     aux "" start

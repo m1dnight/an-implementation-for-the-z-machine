@@ -125,6 +125,17 @@ where our static memory starts.
 > headerSize = 64
 > staticMemoryOffset = WordAddress 14
 
+dictionaryBase reads out the address of the dictionary from the
+header. This is stored in the 8th byte.
+
+> dictionaryBase story =
+>   let dictionaryBaseOffset = WordAddress 8
+>   in
+>     DictionaryBase $ readWord story dictionaryBaseOffset
+
+
+
+
 > load :: String -> IO T
 > load filename =
 >   do file <- B.readFile filename
