@@ -151,3 +151,9 @@ words are always stored with the high byte at the lower address:
 
 > addressOfHighByte (WordAddress address) = ByteAddress address
 > addressOfLowByte  (WordAddress address) = ByteAddress $ address + 1
+
+Turns a Char into a String. This function is here to map well onto the
+code of Eric Lippert.
+
+> stringOfChar :: Char -> String
+> stringOfChar c = [c]

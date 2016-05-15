@@ -42,4 +42,8 @@ The decompressed pointers:
 
 > data ZStringAddress = ZString Int
 
+A single character extraced from ZString encodings.
+
+> data ZChar = ZChar Int
+
 
