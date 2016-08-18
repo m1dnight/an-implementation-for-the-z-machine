@@ -53,4 +53,4 @@ The dictionary of words recognized by the game has a few types.
 > data DictionaryTableBase = DictionaryTableBase Int
 > data DictionaryAddress   = DictionaryAddress Int
 > data DictionaryNumber    = Dictionary Int
-
+> data WordSeperatorNumber = WordSeperatorNumber Int

@@ -201,37 +201,3 @@ result of processZChar is a text and a new state.
 >            else aux (incWordAddr current) acc
 >   in
 >     aux (WordAddress addr) ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- > displayBytes story (ZString addr) =
--- >   aux (WordAddress addr) ""
--- >   where aux current acc = let word   = readWord story current
--- >                               isEnd  = fetchBits bit15 size1 word
--- >                               zchar1 = fetchBits bit14 size5 word
--- >                               zchar2 = fetchBits bit9  size5 word
--- >                               zchar3 = fetchBits bit4  size5 word
--- >                               s      = printf "%02x %s %02x %s %02x %s "
--- >                                         zchar1 (alphabetTable !! zchar1)
--- >                                         zchar2 (alphabetTable !! zchar2)
--- >                                         zchar3 (alphabetTable !! zchar3)
--- >                               acc'    = acc ++ s in
--- >                           if isEnd == 1
--- >                             then acc'
--- >                             else aux (incWordAddr current) acc'

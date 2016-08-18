@@ -9,7 +9,7 @@
 Format of the dictionary:
 
 Byte containing number of word seperators
-Byte seperators, one per byte.
+Word seperators, one per byte.
 Byte giving the number of bytes in each dictionary entry
 Word giving the number of table entries which follow
 

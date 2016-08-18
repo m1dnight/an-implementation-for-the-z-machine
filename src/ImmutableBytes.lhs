@@ -23,8 +23,10 @@ This also means that the tye of the IntMap is Word8.
 See https://hackage.haskell.org/package/bytestring-0.10.6.0/docs/Data-ByteString.html
 and https://wiki.haskell.org/GHC/Memory_Footprint
 
-> data T = T { original_bytes :: ByteString,
->              edits          :: Map.Map Int Word8 }
+> data T = T {
+>              original_bytes :: ByteString,
+>              edits          :: Map.Map Int Word8
+>            }
 
 A function that will return an empty T.
 
