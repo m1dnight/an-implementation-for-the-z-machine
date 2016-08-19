@@ -54,3 +54,14 @@ The dictionary of words recognized by the game has a few types.
 > data DictionaryAddress   = DictionaryAddress Int
 > data DictionaryNumber    = Dictionary Int
 > data WordSeperatorNumber = WordSeperatorNumber Int
+
+There are several different version of Zork. In total, there are 8.
+
+> data Version = V1 | V2 | V3 | V4 | V5 | V6 | V7 | V8 deriving (Eq, Ord)
+
+> data ObjectBase            = ObjectBase Int
+> data PropertyDefaultsTable = PropertyDefaultsTable Int
+> data ObjectTreeBase        = ObjectTreeBase Int
+> data ObjectNumber          = Object Int
+> data ObjectAddress         = ObjectAddress Int
+> data PropertyHeaderAddress = PropertyHeader Int

@@ -5,6 +5,7 @@ import ImmutableBytes
 import Story
 import ZString
 import Dictionary
+import Object
 
 import Text.Printf
 import Data.Bits hiding (setBit, clearBit)
@@ -18,7 +19,9 @@ import Data.Bits hiding (setBit, clearBit)
 -- abbreviated in the virtual machine file.
 
 
+-- Blog: https://ericlippert.com/2016/02/29/temple/
+
 main :: IO ()
 main = do story <- Story.load "minizork.z3"
-          let dict = Dictionary.display story
-          putStrLn dict
+          let table = displayObjectTable story
+          putStrLn table

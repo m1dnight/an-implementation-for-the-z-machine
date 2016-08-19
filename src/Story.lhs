@@ -109,6 +109,38 @@ into the low address.
 >   in
 >     writeByte story' (addressOfLowByte address) low
 
+The version of the Zork file is encoded in the first byte of the file.
+
+> versionOffset = ByteAddress 0
+
+> version :: T -> Version
+> version story = case (readByte story versionOffset) of
+>                   1 -> V1
+>                   2 -> V2
+>                   3 -> V3
+>                   4 -> V4
+>                   5 -> V5
+>                   6 -> V6
+>                   7 -> V7
+>                   8 -> V8
+>                   _ -> error "Unkown version read from story!"
+
+We need a little helper to determine if the version is lower than the
+third version. We just derived Eq and Ord in the type and have that
+one for free. From version 4 onward objects have more than 1 byte
+object numbers, hence the differentiation.
+
+> v3OrLower :: Version -> Bool
+> v3OrLower v = v <= V3
+
+The base of the object table begins at byte 10 in the story header.
+
+> objectTableBase story =
+>   let objectTableBaseOffset = WordAddress 10
+>   in
+>     ObjectBase $ readWord story objectTableBaseOffset
+
+
 The following function reads the 24th byte from memory. It contains a
 16 bit pointer into memory where the abbreviation table starts.
 
@@ -152,4 +184,3 @@ header. This is stored in the 8th byte.
 >                            static  = B.take (len - dynLen) (B.drop dynLen file)
 >                         in
 >                          return $ makeFromByteString dynamic static
-
