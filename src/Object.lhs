@@ -17,6 +17,7 @@ The object table is laid out as follows:
   * the address of an additional table of variable-sized properties.
 * object numbers are one-based, so zero is used as the invalid object.
 
+> invalid_object = Object 0
 
 The object table begins with either 31 or 63 default values for
 properties. Each of them is two bytes.
@@ -131,7 +132,8 @@ length.
 >       size                        = entrySize story
 >   in
 >     (tableEnd - tableStart) `div` size
-
+>
+> displayObjectTable :: T -> [Char]
 > displayObjectTable story =
 >   let count'     = count story
 >       toString i = let current = (Object i)
@@ -145,3 +147,33 @@ length.
 >     accumulateStringsLoop toString 1 (count' + 1)
 >
 >
+> roots :: T -> [ObjectNumber]
+> roots story =
+>   let aux (Object obj) acc =
+>         let current = (Object obj)
+>         in
+>           if current == invalid_object
+>              then acc
+>              else if (parent story current) == invalid_object
+>                      then aux (Object $ obj - 1) (current:acc)
+>                      else aux (Object $ obj - 1) acc
+>   in
+>     aux (Object $ count story) []
+>
+>
+> displayObjectTree story =
+>   let aux acc indent obj =
+>         if obj == invalid_object
+>          then acc
+>          else let name'        = name story obj
+>                   child'       = child story obj
+>                   sibling'     = sibling story obj
+>                   objectText   = printf "%s%s\n" (indent :: String) (name' :: String)
+>                   withObject   = acc ++ objectText
+>                   newIndent    = "    " ++ indent
+>                   withChildren = aux withObject newIndent child'
+>               in
+>                 aux withChildren indent sibling'
+>       toString obj = aux "" "" obj
+>   in
+>      accumulateStrings toString (roots story)

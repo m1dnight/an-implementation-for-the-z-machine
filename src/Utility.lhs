@@ -72,7 +72,7 @@ setBitTo takes a value and sets that bit to that given value.
 
 > setBitTo n word value = if value == 1 then setBit n word else clearBit n word
 
-fetchBits takes a word and returns the sequence of bits from n to 
+fetchBits takes a word and returns the sequence of bits from n to
 
  - The mask is computed by shifting -1 to the left for `len`. This
    generates a word with all ones, but `len` zeros on the right.
@@ -160,7 +160,7 @@ code of Eric Lippert.
 > stringOfChar :: Char -> String
 > stringOfChar c = [c]
 
-
+> accumulateStringsLoop :: (Num a, Ord a) => (a -> [Char]) -> a -> a -> [Char]
 > accumulateStringsLoop toString start max =
 >   let aux acc i =
 >         if i >= max
@@ -168,3 +168,9 @@ code of Eric Lippert.
 >            else aux (acc ++ (toString i)) (i + 1)
 >   in
 >     aux "" start
+
+> accumulateStrings :: (a -> String) -> [a] -> String
+> accumulateStrings toString items =
+>   let folder text item = text ++ (toString item)
+>   in
+>     Prelude.foldl folder "" items

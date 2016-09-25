@@ -62,6 +62,6 @@ There are several different version of Zork. In total, there are 8.
 > data ObjectBase            = ObjectBase Int
 > data PropertyDefaultsTable = PropertyDefaultsTable Int
 > data ObjectTreeBase        = ObjectTreeBase Int
-> data ObjectNumber          = Object Int
+> data ObjectNumber          = Object Int deriving (Eq)
 > data ObjectAddress         = ObjectAddress Int
 > data PropertyHeaderAddress = PropertyHeader Int
